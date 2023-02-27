@@ -22,4 +22,4 @@ After employee information has been entered open the browser through the team.ht
 Used past assignments to help with code.
 
 github: https://github.com/Melissagon/teamProfile
-Video walkthrough: https://obscure-badlands-61191.herokuapp.com/ 
+Video walkthrough: https://app.castify.com/view/4431b38a-3b0d-4325-ba5f-885536f0c653
