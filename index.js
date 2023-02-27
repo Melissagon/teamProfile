@@ -1,5 +1,5 @@
 const Manager = require('./lib/Manager');
-const Engineer = require('./lib/Engineer');
+const Coder = require('./lib/Coder');
 const Intern = require('./lib/Intern');
 const inquirer = require('inquirer');
 const path = require('path');
@@ -19,8 +19,8 @@ console.log(
 );
 
 function appMenu() {
-  function createManager() {
-    console.log('Please build your team 👥');
+  function createAManager() {
+    console.log('Please build your team');
     inquirer
       .prompt([
         {
@@ -49,7 +49,7 @@ function appMenu() {
         {
           type: 'input',
           name: 'managerEmail',
-          message: "What is the team manager's email?",
+          message: "What is the manager's email?",
           validate: (answer) => {
             const pass = answer.match(/\S+@\S+\.\S+/);
             if (pass) {
@@ -61,7 +61,7 @@ function appMenu() {
         {
           type: 'input',
           name: 'managerOfficeNumber',
-          message: "What is the team manager's office number?",
+          message: "What is the manager's office number?",
           validate: (answer) => {
             const pass = answer.match(/^[1-9]\d*$/);
             if (pass) {
@@ -80,11 +80,11 @@ function appMenu() {
         );
         teamMembers.push(manager);
         idArray.push(answers.managerId);
-        createTeam();
+        createTheTeam();
       });
   }
 
-  function createTeam() {
+  function createTheTeam() {
     inquirer
       .prompt([
         {
@@ -92,7 +92,7 @@ function appMenu() {
           name: 'memberChoice',
           message: 'Which type of team member would you like to add?',
           choices: [
-            'Engineer',
+            'Coder',
             'Intern',
             "I don't want to add any more team members",
           ],
@@ -100,8 +100,8 @@ function appMenu() {
       ])
       .then((userChoice) => {
         switch (userChoice.memberChoice) {
-          case 'Engineer':
-            addEngineer();
+          case 'Coder':
+            addCoder();
             break;
           case 'Intern':
             addIntern();
@@ -112,13 +112,13 @@ function appMenu() {
       });
   }
 
-  function addEngineer() {
+  function addCoder() {
     inquirer
       .prompt([
         {
           type: 'input',
-          name: 'engineerName',
-          message: "What is your engineer's name?",
+          name: 'coderName',
+          message: "What is your coder's name?",
           validate: (answer) => {
             if (answer !== '') {
               return true;
@@ -128,8 +128,8 @@ function appMenu() {
         },
         {
           type: 'input',
-          name: 'engineerId',
-          message: "What is your engineer's id?",
+          name: 'coderId',
+          message: "What is your coder's id?",
           validate: (answer) => {
             const pass = answer.match(/^[1-9]\d*$/);
             if (pass) {
@@ -144,8 +144,8 @@ function appMenu() {
         },
         {
           type: 'input',
-          name: 'engineerEmail',
-          message: "What is your engineer's email?",
+          name: 'coderEmail',
+          message: "What is your coder's email?",
           validate: (answer) => {
             const pass = answer.match(/\S+@\S+\.\S+/);
             if (pass) {
@@ -156,8 +156,8 @@ function appMenu() {
         },
         {
           type: 'input',
-          name: 'engineerGithub',
-          message: "What is your engineer's GitHub username?",
+          name: 'coderGithub',
+          message: "What is your coder's GitHub username?",
           validate: (answer) => {
             if (answer !== '') {
               return true;
@@ -167,15 +167,15 @@ function appMenu() {
         },
       ])
       .then((answers) => {
-        const engineer = new Engineer(
-          answers.engineerName,
-          answers.engineerId,
-          answers.engineerEmail,
-          answers.engineerGithub
+        const coder = new Coder(
+          answers.coderName,
+          answers.coderId,
+          answers.coderEmail,
+          answers.coderGithub
         );
-        teamMembers.push(engineer);
-        idArray.push(answers.engineerId);
-        createTeam();
+        teamMembers.push(coder);
+        idArray.push(answers.coderId);
+        createTheTeam();
       });
   }
 
@@ -242,19 +242,18 @@ function appMenu() {
         );
         teamMembers.push(intern);
         idArray.push(answers.internId);
-        createTeam();
+        createTheTeam();
       });
   }
 
   function buildTeam() {
-    // Create the output directory if the dist path doesn't exist
     if (!fs.existsSync(DIST_DIR)) {
       fs.mkdirSync(DIST_DIR);
     }
     fs.writeFileSync(distPath, render(teamMembers), 'utf-8');
   }
 
-  createManager();
+  createAManager();
 }
 
 appMenu();
