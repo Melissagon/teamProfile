@@ -1,6 +1,6 @@
-const generateTeam = team => {
+const generateTheTeam = team => {
 
-    const generateManager = manager => {
+    const generateAManager = manager => {
         return `
         <div class="card employee-card">
         <div class="card-header">
@@ -18,25 +18,25 @@ const generateTeam = team => {
         `;
     };
 
-    const generateEngineer = engineer => {
+    const generateACoder = coder => {
         return `
         <div class="card employee-card">
     <div class="card-header">
-        <h2 class="card-title">${engineer.getName()}</h2>
-        <h3 class="card-title"><i class="fas fa-glasses mr-2"></i>${engineer.getRole()}</h3>
+        <h2 class="card-title">${coder.getName()}</h2>
+        <h3 class="card-title"><i class="fas fa-glasses mr-2"></i>${coder.getRole()}</h3>
     </div>
     <div class="card-body">
         <ul class="list-group">
-            <li class="list-group-item">ID: ${engineer.getId()}</li>
-            <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
-            <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.getGithub()}" target="_blank" rel="noopener noreferrer">${engineer.getGithub()}</a></li>
+            <li class="list-group-item">ID: ${coder.getId()}</li>
+            <li class="list-group-item">Email: <a href="mailto:${coder.getEmail()}">${coder.getEmail()}</a></li>
+            <li class="list-group-item">GitHub: <a href="https://github.com/${coder.getGithub()}" target="_blank" rel="noopener noreferrer">${coder.getGithub()}</a></li>
         </ul>
     </div>
 </div>
         `;
     };
 
-    const generateIntern = intern => {
+    const generateAIntern = intern => {
         return `
         <div class="card employee-card">
     <div class="card-header">
@@ -58,16 +58,16 @@ const generateTeam = team => {
 
     html.push(team
         .filter(employee => employee.getRole() === "Manager")
-        .map(manager => generateManager(manager))
+        .map(manager => generateAManager(manager))
     );
     html.push(team
-        .filter(employee => employee.getRole() === "Engineer")
-        .map(engineer => generateEngineer(engineer))
+        .filter(employee => employee.getRole() === "Coder")
+        .map(coder => generateACoder(coder))
         .join("")
     );
     html.push(team
         .filter(employee => employee.getRole() === "Intern")
-        .map(intern => generateIntern(intern))
+        .map(intern => generateAIntern(intern))
         .join("")
     );
 
@@ -103,7 +103,7 @@ module.exports = team => {
     <div class="container">
         <div class="row">
             <div class="team-area col-12 d-flex justify-content-center">
-                ${generateTeam(team)}
+                ${generateTheTeam(team)}
             </div>
         </div>
     </div>
